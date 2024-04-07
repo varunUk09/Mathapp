@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+/* { font-family: "Josefin Sans", sans-serif;}*/
+
+/* common css */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+:root {
+    --primaryClr: #1a1824;
+    --secondaryClr: #fff;
+    --ternoryclr: #fec600;
+    --successClr: #79c7a3;
+    --lgfnt: 34px;
+    --smfnt: 12px;
+    --mdfnt: 18px;
+}
+
+.font-300 {
+    font-weight: 300;
+}
+
+.font-400 {
+    font-weight: 400;
+}
+
+.font-600 {
+    font-weight: 600;
+}
+
+.font-md {
+    font-size: var(--mdfnt);
+}
+
+.font-sm {
+    font-size: var(--smfnt);
+}
+
+.font-lg {
+    font-size: var(--lgfnt);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+html body .questionsSettingsForm .fieldGroup input,
+html body .questionsSettingsForm .fieldGroup select,
+html body .practiceQueGrp input {
+    border: 2px solid var(--primaryClr);
+    color: var(--primaryClr);
+    border-radius: 4px;
+    padding: 12px 10px 9px;
+    width: 100%;
+}
+
+/* common css end */
+
+html body .mainContainer>.mainWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+    margin: auto;
+    max-width: 800px;
+    width: 100%;
+}
+
+html body .mainHeading {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+html body .mainContentbox {
+    width: 100%;
+}
+
+html body .mainSection {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+html body .mainSection>* {
+    width: 100%;
+}
+
+html body .mainContainer {
+    margin-bottom: 20px;
+    flex: 1;
+    padding: 10px;
+    display: flex;
+}
+
+
+/* stage show hide logic */
+html body .mainContentbox:not([data-stage="1"])>[data-stage-for="1"],
+html body .mainContentbox:not([data-stage="2"])>[data-stage-for="2"],
+html body .mainContentbox:not([data-stage="3"])>[data-stage-for="3"],
+html body .mainContentbox:not([data-stage="4"])>[data-stage-for="4"],
+html body .mainContentbox:not([data-stage="5"])>[data-stage-for="5"],
+html body .mainContentbox:not([data-stage="6"])>[data-stage-for="6"] {
+    display: none;
+}
+
+/* stage show hide logic end */
+
+/* stage 1 css */
+html body .actionsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 9px;
+}
+
+html body .actionsList .actionItem {
+    background: var(--primaryClr);
+    color: var(--secondaryClr);
+    padding: 15px 7px 13px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid var(--primaryClr);
+}
+
+html body .actionsList .actionItem:hover {
+    background: var(--secondaryClr);
+    color: var(--primaryClr);
+    border-color: var(--primaryClr);
+}
+
+@media(max-width:576px) {
+    html body .actionsList {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* stage 1 css end */
+
+/* stage 2 css */
+html body .questionsSettingsForm .fieldGroup {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    color: var(--primaryClr);
+}
+
+html body .questionsSettingsForm {
+    width: 100%;
+    max-width: 266px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html body .questionsSettingsForm .fieldGroup+.fieldGroup {
+    margin-top: 15px;
+}
+
+html body .questionsSettingsForm .fieldGroup[data-ques-range] {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+html body .questionsSettingsForm .fieldGroup[data-ques-range] label {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+html body .questionsSettingsForm #submitQuesSettings {
+    background: var(--primaryClr);
+    color: var(--secondaryClr);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+html body .questionsSettingsForm #submitQuesSettings:hover {
+    background: var(--secondaryClr);
+    color: var(--primaryClr);
+}
+
+html body .mainContentbox:not([data-of-stage-range="true"]) [data-ques-range] {
+    display: none;
+}
+
+/* stage 2 css end */
+
+/* stage 3 css start */
+html body .practiceQueGrp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-gap: 10px;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    left: 0;
+    opacity: 1;
+}
+
+html body .practiceQues {
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+html body .practiceQues>.practiceQueGrp:not(.active) {
+    opacity: 0;
+    z-index: -1;
+}
+
+/* stage 3 css end */
+
+/* footer css */
+html body footer {
+    padding: 10px;
+}
+
+html body .attribution {
+    display: flex;
+    width: 100%;
+    overflow-wrap: anywhere;
+    max-width: fit-content;
+    margin: auto;
+    align-items: center;
+    grid-gap: 6px;
+    text-decoration: underline;
+}
+
+html body .attribution img {
+    width: var(--smfnt);
+    vertical-align: middle;
+}
+
+/* footer css end */

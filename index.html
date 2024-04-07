@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathapp</title>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <section class="mainSection">
+        <main class="mainContainer">
+            <div class="mainWrapper">
+                <h1 class="mainHeading font-600 font-lg">Mathapp</h1>
+                <!--content-->
+                <div class="mainContentbox" data-stage="1">
+                    <!-- stage 1 -->
+                    <ul class="actionsList" data-stage-for="1">
+                        <a class="actionItem  font-400 font-md" data-type="cubeRoot" data-stage-num="2">
+                            Cube Roots
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="squareRoot" data-stage-num="2">
+                            Square Roots
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="additions" data-stage-num="2">
+                            Additions
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="substractions" data-stage-num="2">
+                            Substractions
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="multiplications" data-stage-num="2">
+                            Multiplications
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="Squares" data-stage-num="2"
+                            data-stage-contain-range="true">
+                            Squares
+                        </a>
+                        <a class="actionItem  font-400 font-md" data-type="Cubes" data-stage-num="2"
+                            data-stage-contain-range="true">
+                            Cubes
+                        </a>
+                    </ul>
+                    <!-- stage 2 -->
+                    <div class="questionsSettings" data-stage-for="2">
+                        <form novalidate="" class="questionsSettingsForm">
+                            <div class="fieldGroup" data-ques-nums="">
+                                <label for="numberofques" class="font-600 font-md">1. Number of questions?</label>
+                                <input type="number" min="1" max="100" id="numberofques" class="font-400 font-md">
+                            </div>
+                            <div class="fieldGroup" data-ques-levels="">
+                                <label for="difficultyQues" class="font-600 font-md">2. Difficulty</label>
+                                <select class="font-400 font-md" id="difficultyQues">
+                                    <option value="easy">Easy</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="difficult">Difficult</option>
+                                </select>
+
+                            </div>
+                            <div class="fieldGroup" data-ques-range="">
+                                <label class="font-600 font-md">3. Provide range (From - To)</label>
+                                <input type="number" min="1" max="100" id="rangeFrom" class="font-400 font-md">
+                                <input type="number" min="1" max="100" id="rangeTo" class="font-400 font-md">
+                            </div>
+                            <div class="fieldGroup">
+
+
+                                <input type="submit" id="submitQuesSettings" class="font-600 font-md" value="Start">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- stage 3 -->
+                    <div class="practiceQues" data-stage-for="3"></div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <!-- attribution -->
+            <span class="attribution font-600 font-sm">Made with Love <img src="./assets/redheart.svg" /> </span>
+        </footer>
+    </section>
+</body>
+
+</html>
