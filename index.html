@@ -16,6 +16,12 @@
                 <h1 class="mainHeading font-600 font-lg">Mathapp</h1>
                 <!--content-->
                 <div class="mainContentbox" data-stage="1">
+                    <!-- navigation to stages -->
+                    <ul class="progressSteps">
+                        <a class="progressStep font-600 font-md" data-step="1">1</a>
+                        <a class="progressStep font-600 font-md" data-step="2">2</a>
+                        <a class="progressStep font-600 font-md" data-step="3">3</a>
+                    </ul>
                     <!-- stage 1 -->
                     <ul class="actionsList" data-stage-for="1">
                         <a class="actionItem  font-400 font-md" data-type="cubeRoot" data-stage-num="2">
@@ -44,14 +50,22 @@
                     </ul>
                     <!-- stage 2 -->
                     <div class="questionsSettings" data-stage-for="2">
-                        <form novalidate="" class="questionsSettingsForm">
+                        <form class="questionsSettingsForm">
+                            <div class="fieldGroup">
+                                <div class="stepNavigation">
+                                    <button class="changeStep" data-step="1" type="button">
+                                        <img src="./assets/backicon.svg" />
+                                    </button>
+                                </div>
+                            </div>
                             <div class="fieldGroup" data-ques-nums="">
                                 <label for="numberofques" class="font-600 font-md">1. Number of questions?</label>
-                                <input type="number" min="1" max="100" id="numberofques" class="font-400 font-md">
+                                <input type="number" min="1" max="100" id="numberofques"
+                                    class="font-400 font-md styledField" required name="numberofques">
                             </div>
                             <div class="fieldGroup" data-ques-levels="">
                                 <label for="difficultyQues" class="font-600 font-md">2. Difficulty</label>
-                                <select class="font-400 font-md" id="difficultyQues">
+                                <select class="font-400 font-md styledField" id="difficultyQues">
                                     <option value="easy">Easy</option>
                                     <option value="moderate">Moderate</option>
                                     <option value="difficult">Difficult</option>
@@ -60,18 +74,27 @@
                             </div>
                             <div class="fieldGroup" data-ques-range="">
                                 <label class="font-600 font-md">3. Provide range (From - To)</label>
-                                <input type="number" min="1" max="100" id="rangeFrom" class="font-400 font-md">
-                                <input type="number" min="1" max="100" id="rangeTo" class="font-400 font-md">
+                                <input type="number" min="1" max="100" id="rangeFrom"
+                                    class="font-400 font-md styledField">
+                                <input type="number" min="1" max="100" id="rangeTo"
+                                    class="font-400 font-md styledField">
                             </div>
                             <div class="fieldGroup">
-
-
-                                <input type="submit" id="submitQuesSettings" class="font-600 font-md" value="Start">
+                                <input type="submit" id="submitQuesSettings" class="font-600 font-md styledField"
+                                    value="Start">
                             </div>
                         </form>
                     </div>
                     <!-- stage 3 -->
-                    <div class="practiceQues" data-stage-for="3"></div>
+                    <div class="practiceQues" data-stage-for="3">
+                        <div class="stepNavigation">
+                            <button class="changeStep" data-step="2" type="button">
+                                <img src="./assets/backicon.svg" />
+                            </button>
+                        </div>
+                        <ul class="practiceQuesList"></ul>
+                        <input type="number" class="font-600 font-md styledField">
+                    </div>
                 </div>
             </div>
         </main>

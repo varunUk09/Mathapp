@@ -53,15 +53,21 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-html body .questionsSettingsForm .fieldGroup input,
-html body .questionsSettingsForm .fieldGroup select,
-html body .practiceQueGrp input {
+html body .styledField {
     border: 2px solid var(--primaryClr);
     color: var(--primaryClr);
     border-radius: 4px;
     padding: 12px 10px 9px;
     width: 100%;
+    outline: none;
 }
+
+html,
+body {
+    height: 100%;
+    overflow: auto;
+}
+
 
 /* common css end */
 
@@ -90,9 +96,9 @@ html body .mainContentbox {
 html body .mainSection {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 html body .mainSection>* {
@@ -221,14 +227,80 @@ html body .practiceQues {
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    flex-direction: column;
+    isolation: isolate;
 }
 
-html body .practiceQues>.practiceQueGrp:not(.active) {
+html body .practiceQues .practiceQueGrp:not(.active) {
     opacity: 0;
     z-index: -1;
 }
 
+html body .practiceQuesList {
+    display: flex;
+    width: 100%;
+    position: relative;
+    min-height: 40px;
+    align-items: center;
+}
+
 /* stage 3 css end */
+
+/* progress steps css */
+html body .progressSteps {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    margin-bottom: 14px;
+}
+
+html body .progressSteps .progressStep {
+    --wdt: 30px;
+    width: var(--wdt);
+    height: var(--wdt);
+    border: 2px solid var(--primaryClr);
+    border-radius: 100vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+html body .mainContentbox[data-stage='1'] .progressSteps [data-step='1'],
+html body .mainContentbox[data-stage='2'] .progressSteps [data-step='2'],
+html body .mainContentbox[data-stage='3'] .progressSteps [data-step='3'] {
+    background: var(--ternoryclr);
+    color: var(--primaryClr);
+    border-color: var(--ternoryclr);
+}
+
+html body .stepNavigation button {
+    --wdt: 30px;
+    width: var(--wdt);
+    height: var(--wdt);
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+html body .stepNavigation button img {
+    display: block;
+    width: 100%;
+}
+
+html body .stepNavigation {
+    display: flex;
+    justify-content: center;
+}
+
+/* progress steps css end */
 
 /* footer css */
 html body footer {

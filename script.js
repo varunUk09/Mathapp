@@ -60,16 +60,25 @@
             changeStage(num, isRange);
         });
 
-        live('html body .practiceQueGrp input', 'input', function () {
-            const data = {
-                num1: this.getAttribute('data-num1'),
-                num2: this.getAttribute('data-num2') || 'NAN',
-                func: this.getAttribute('data-method'),
-                value: this.value
-            }
+        live('.practiceQues input[type="number"]', 'input', function () {
+            const activeEl = document.querySelector('.practiceQues .practiceQueGrp.active');
+            if (activeEl) {
+                const data = {
+                    num1: activeEl.getAttribute('data-num1'),
+                    num2: activeEl.getAttribute('data-num2') || 'NAN',
+                    func: activeEl.getAttribute('data-method'),
+                    value: this.value
+                }
 
-            evaluate(data, this.parentElement);
-        })
+                evaluate(data, activeEl);
+            }
+        });
+
+        live('html body .stepNavigation button', 'click', function () {
+            const stepNum = this.getAttribute('data-step');
+            console.log(stepNum)
+            changeStage(stepNum);
+        });
 
         document.querySelector('.questionsSettingsForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -79,12 +88,24 @@
             const level = document.querySelector('#difficultyQues').value;
             // get num of ques
             const numOfQues = document.querySelector('#numberofques').value;
+            // get range
+            const range1 = document.querySelector('#rangeFrom').value;
+            const range2 = document.querySelector('#rangeTo').value;
 
-            generateQuestions({
+            const data = {
                 level: level,
                 quesType: type,
                 numQuestions: numOfQues
-            })
+            }
+
+            if (document.querySelector('html body .mainContentbox[data-of-stage-range="true"]')) {
+                data['range'] = {
+                    range1: range1,
+                    range2: range2
+                }
+            }
+
+            generateQuestions(data)
         });
     }
 
@@ -108,24 +129,34 @@
             quesDigits = 5;
         }
 
-        const questions = generateRandomNumbs(data.numQuestions, quesDigits, sequence);
+        const quesData = {
+            numQuestions: data.numQuestions,
+            quesDigits: quesDigits,
+            sequence: sequence,
+            type: data.quesType
+        }
+
+        if (data.range) {
+            quesData['minRange'] = data.range.range1;
+            quesData['maxRange'] = data.range.range2;
+        }
+
+        const questions = generateRandomNumbs(quesData);
         convertQuesToMarkup(questions, data.quesType, sequence);
     }
 
     // for add,multy,sub
-    function generateRandomNumbs(numQuestions, numDigits, sequence) {
+    function generateRandomNumbs(data) {
         const questions = [];
-        const minNum = Math.pow(10, numDigits - 1); // Minimum number based on the number of digits
-        const maxNum = Math.pow(10, numDigits) - 1; // Maximum number based on the number of digits
-        for (let i = 0; i < numQuestions; i++) {
-            const num1 = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
-
+        let minNum = data.minRange || Math.pow(10, data.quesDigits - 1); // Minimum number based on the number of digits
+        let maxNum = data.maxRange || Math.pow(10, data.quesDigits) - 1; // Maximum number based on the number of digits
+        for (let i = 0; i < data.numQuestions; i++) {
+            const num1 = Math.floor(Math.random() * (maxNum - minNum + 1)) + Number(minNum);
             const question = {
                 'num1': num1,
             };
-
-            if (sequence > 1) {
-                const num2 = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+            if (data.sequence > 1) {
+                const num2 = Math.floor(Math.random() * (maxNum - minNum + 1)) + Number(minNum);
                 question["num2"] = num2;
             }
             questions.push(question);
@@ -153,6 +184,7 @@
         }
 
         const html = questions.reduce(function (t, ques) {
+            let dataAttri = `data-num1='${ques.num1}' data-num2='${ques.num2}' data-method='${type}'`;
             let praciceQueHtml = `<span class="praciceQue font-600 font-md">${ques.num1} ${symbol} ${ques.num2} =</span>`;
             if (sequence < 2 && (type != methods.CB && type != methods.SQ)) {
                 praciceQueHtml = `<span class="praciceQue font-600 font-md">${symbol}${ques.num1} =</span>`;
@@ -160,19 +192,19 @@
                 praciceQueHtml = `<span class="praciceQue font-600 font-md">${ques.num1}<sup>${symbol}</sup> =</span>`;
             }
             return t += `
-                        <div class="practiceQueGrp">
+                        <div class="practiceQueGrp" ${dataAttri}>
                             ${praciceQueHtml}
-                            <input type="number" class="font-600 font-md" data-num1='${ques.num1}' data-num2='${ques.num2}' data-method='${type}'>
                         </div>
                 `;
         }, '');
 
-        document.querySelector('.practiceQues').innerHTML = html;
+        document.querySelector('.practiceQues .practiceQuesList').innerHTML = html;
         document.querySelector('.practiceQueGrp:nth-child(1)')?.classList.add('active');
     }
 
     function evaluate(data, quesEl) {
         let result = '';
+        const ansInputBox = document.querySelector('.practiceQues input[type="number"]');
         if (data.func == methods.AD) {
             result = eval(`${data.num1} + ${data.num2}`);
         } else if (data.func == methods.SB) {
@@ -193,7 +225,8 @@
             const nextEl = quesEl.nextElementSibling;
             if (nextEl) {
                 nextEl.classList.add('active');
-                nextEl.focus();
+                ansInputBox.value = '';
+                ansInputBox.focus();
             } else {
                 changeStage(1);
             }
