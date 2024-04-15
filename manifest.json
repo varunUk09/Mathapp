@@ -1,7 +1,7 @@
 {
   "name": "Math App",
   "short_name": "MathApp",
-  "start_url": "/",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
