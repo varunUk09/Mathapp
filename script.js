@@ -409,7 +409,7 @@
         }
         let formatedNums = `${data.num1} ${symbol} ${data.num2} = `;
         if (data.sequence < 2 && (data.type != METHODS.CB && data.type != METHODS.SQ)) {
-            formatedNums = `${symbol}${ques.num1} = `;
+            formatedNums = `${symbol}${data.num1} = `;
         } else if (data.sequence < 2 && (data.type == METHODS.CB || data.type == METHODS.SQ)) {
             formatedNums = `${data.num1}<sup>${symbol}</sup> = `;
         }
