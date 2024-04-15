@@ -1,11 +1,11 @@
 const staticDevCoffee = "dev-coffee-site-v1";
 const assets = [
-    "/",
-    "/index.html",
-    "/style.css",
-    "/app.js",
-    "/images/backicon.svg",
-    "/images/redheart.jpg",
+    "/Mathapp/",
+    "/Mathapp/index.html",
+    "/Mathapp/style.css",
+    "/Mathapp/app.js",
+    "/Mathapp/images/backicon.svg",
+    "/Mathapp/images/redheart.jpg",
 ];
 
 self.addEventListener("install", installEvent => {
