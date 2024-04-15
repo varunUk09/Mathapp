@@ -113,7 +113,7 @@
         const stepNavigationHTML = `<div class="fieldGroup">
                                 <div class="stepNavigation">
                                     <button class="changeStep" data-go-to-step="1" type="button">
-                                        <img src="./assets/backicon.svg">
+                                        <img src="./images/backicon.svg">
                                     </button>
                                 </div>
                             </div>`;
@@ -487,4 +487,14 @@
 
     // init
     init();
+
+    // PWA
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err));
+        });
+    }
 })();
